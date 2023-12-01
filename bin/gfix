@@ -1,0 +1,14 @@
+#!/bin/bash
+set -euo pipefail
+
+if [ $# -eq 0 ]; then
+    echo "Need to pass in a ref!"
+    exit 1
+fi
+
+git stash
+git rebase -i $1
+git stash apply
+git add .
+GIT_EDITOR=true git rebase --continue
+git push -f
