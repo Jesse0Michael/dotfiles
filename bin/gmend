@@ -1,0 +1,6 @@
+#!/bin/bash
+set -euo pipefail
+
+git add .
+GIT_EDITOR=true git commit -a --amend
+git push -f

@@ -1,0 +1,33 @@
+#!/bin/bash -e
+
+# Handle SIGINT signal (Ctrl+C)
+trap 'kill $(jobs -p) 2>/dev/null' SIGINT
+
+# Run docker ps to get the container names and ports
+while read -r name ports; do
+  # Split the ports field into individual port mappings
+  while read -r port; do
+    # If it's a TCP mapping
+    if [[ $port == *tcp* ]]; then
+      # Extract the dynamic port and the local port
+      dynamic_port=$(echo $port | awk -F '->' '{print $1}' | awk -F ':' '{print $2}')
+      local_port=$(echo $port | awk -F '->' '{print $2}' | awk -F '/' '{print $1}')
+
+      # If the dynamic port doesn't match the local port
+      if [[ $dynamic_port != $local_port ]]; then
+        # Check if the local port is already in use
+        if lsof -Pi :$local_port -sTCP:LISTEN -t >/dev/null ; then
+          echo "Local port $local_port is already in use"
+        else
+          echo "Forwarding local port $local_port to dynamic port $dynamic_port for container $name"
+          # Forward local port to the dynamic port assigned to the Docker service
+          socat TCP-LISTEN:$local_port,fork TCP:localhost:$dynamic_port &
+        fi
+      fi
+    fi
+  done < <(echo "$ports" | tr ',' '\n')
+done < <(docker ps --format '{{.Names}} {{.Ports}}')
+
+# Keep the script running until the user hits Ctrl+C
+while true; do sleep 1; done
+

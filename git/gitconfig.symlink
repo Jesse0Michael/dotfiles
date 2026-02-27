@@ -1,0 +1,25 @@
+[filter "lfs"]
+        process = git-lfs filter-process
+        required = true
+        clean = git-lfs clean -- %f
+        smudge = git-lfs smudge -- %f
+
+[user]
+        name = Jesse Michael
+        email = jesse.michael1234@gmail.com
+        signingkey = ~/.ssh/id_ed25519.pub
+
+[url "ssh://git@github.com/"]
+        insteadOf = https://github.com/
+
+[commit]
+        gpgsign = true
+
+[gpg]
+        format = ssh
+
+[init]
+        defaultBranch = main
+
+[include]
+        path = ~/.gitconfig.local

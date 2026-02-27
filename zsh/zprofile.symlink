@@ -1,0 +1,4 @@
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Machine-local profile config (not committed to git)
+[ -f ~/.zprofile.local ] && source ~/.zprofile.local

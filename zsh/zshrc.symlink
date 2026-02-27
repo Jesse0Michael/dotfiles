@@ -1,0 +1,23 @@
+export DOTFILES="${DOTFILES:-$HOME/dotfiles}"
+
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+
+ZSH_THEME="robbyrussell"
+
+plugins=(git dotenv)
+
+# Load: ALIASES
+source "$DOTFILES/zsh/aliases"
+
+# Load: OH-MY-ZSH
+source $ZSH/oh-my-zsh.sh
+
+export PATH="${PATH}:${DOTFILES}/bin"
+export PATH="${PATH}:$HOME/go/bin"
+export PATH="${PATH}:$HOME/.local/bin"
+
+unsetopt share_history
+
+# Machine-local config (not committed to git)
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local

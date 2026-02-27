@@ -1,0 +1,11 @@
+#!/bin/bash
+set -euo pipefail
+
+default_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed "s@^refs/remotes/origin/@@")
+
+git fetch origin
+git rebase --autostash origin/$default_branch
+
+if [ "${1:-}" = "-f" ]; then
+    git push -f
+fi
