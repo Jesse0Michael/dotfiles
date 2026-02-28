@@ -134,13 +134,14 @@ install_config () {
   # config/<dir>/file -> ~/.<dir>/file
   # e.g. config/claude/settings.json -> ~/.claude/settings.json
   # e.g. config/config/ghostty/config -> ~/.config/ghostty/config
-  while IFS= read -r src; do
+  for src in $(find -H "$DOTFILES_ROOT/config" -mindepth 2 -type f -not -path '*.git*')
+  do
     local relative dst
     relative="${src#$DOTFILES_ROOT/config/}"
     dst="$HOME/.${relative}"
     mkdir -p "$(dirname "$dst")"
     link_file "$src" "$dst"
-  done < <(find -H "$DOTFILES_ROOT/config" -mindepth 2 -type f -not -path '*.git*')
+  done
 }
 
 install_oh_my_zsh
