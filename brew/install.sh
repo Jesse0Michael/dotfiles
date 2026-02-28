@@ -42,7 +42,7 @@ brew install youtube-dl
 brew install imagemagick
 
 # Install essential casks
-brew install --cask iterm2
+brew install --cask ghostty
 brew install --cask gcloud-cli
 brew install --cask claude-code
 brew install --cask charles

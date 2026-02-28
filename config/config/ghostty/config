@@ -1,0 +1,20 @@
+# Font
+font-size = 13
+
+# Window
+window-padding-x = 8
+window-padding-y = 8
+
+# Theme
+theme = TokyoNight Night
+
+# Quick terminal - system-wide hotkey (works from any app)
+keybind = global:cmd+grave_accent=toggle_quick_terminal
+quick-terminal-position = top
+quick-terminal-screen = main
+quick-terminal-animation-duration = 0
+quick-terminal-size = 640px,960px
+
+
+# Shell integration (auto-detects zsh)
+shell-integration = detect

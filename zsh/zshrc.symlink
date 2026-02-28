@@ -1,3 +1,4 @@
+[[ -L ~/.zshrc ]] && export DOTFILES="${DOTFILES:-$(cd "$(dirname "$(readlink ~/.zshrc)")/.." && pwd)}"
 export DOTFILES="${DOTFILES:-$HOME/dotfiles}"
 
 # Path to your oh-my-zsh installation.
@@ -18,6 +19,9 @@ export PATH="${PATH}:$HOME/go/bin"
 export PATH="${PATH}:$HOME/.local/bin"
 
 unsetopt share_history
+
+# Ghostty shell integration
+[ -n "$GHOSTTY_RESOURCES_DIR" ] && source "$GHOSTTY_RESOURCES_DIR/shell-integration/zsh/ghostty-integration"
 
 # Machine-local config (not committed to git)
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
