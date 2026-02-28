@@ -18,19 +18,34 @@ fi
 # Install the essential brews
 brew install gh
 brew install git
+brew install git-lfs
+brew install jq  
+brew install tmux 
+brew install go  
 brew install node
-brew install lazygit
+brew install golangci-lint 
+brew install awscli
+brew install terraform
+brew install kubernetes-cli 
+brew install kubectx 
+brew install helm
+brew install k9s
+brew install buf 
+brew install protobuf
 brew install lsd
 brew install tree
-brew install yarn
 brew install zsh
 brew install zsh-completions
-brew install neovim
+brew install redis
+brew install ffmpeg
+brew install youtube-dl
+brew install imagemagick
 
 # Install essential casks
 brew install --cask iterm2
+brew install --cask gcloud-cli
+brew install --cask claude-code
 brew install --cask charles
-brew install --cask firefox
 
 # Update and Upgrade
 echo "Updating and upgrading Homebrew..."; echo;

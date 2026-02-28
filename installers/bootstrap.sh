@@ -126,8 +126,26 @@ install_dotfiles () {
   done
 }
 
+install_config () {
+  info 'installing config files'
+
+  local overwrite_all=false backup_all=false skip_all=false
+
+  # config/<dir>/file -> ~/.<dir>/file
+  # e.g. config/claude/settings.json -> ~/.claude/settings.json
+  # e.g. config/config/ghostty/config -> ~/.config/ghostty/config
+  while IFS= read -r src; do
+    local relative dst
+    relative="${src#$DOTFILES_ROOT/config/}"
+    dst="$HOME/.${relative}"
+    mkdir -p "$(dirname "$dst")"
+    link_file "$src" "$dst"
+  done < <(find -H "$DOTFILES_ROOT/config" -mindepth 2 -type f -not -path '*.git*')
+}
+
 install_oh_my_zsh
 install_dotfiles
+install_config
 
 # If we're on a Mac, install dependencies.
 if [ "$(uname -s)" == "Darwin" ]

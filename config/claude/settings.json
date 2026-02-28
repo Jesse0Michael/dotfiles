@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "Read",
+      "Edit",
+      "Bash(make:*)",
+      "Bash(grep:*)",
+      "Bash(sed:*)",
+      "Bash(go:*)",
+      "Bash(goimports:*)",
+      "Bash(buf:*)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(git status*)",
+      "Bash(git log*)",
+      "Bash(git diff*)",
+      "Bash(git show*)",
+      "Bash(git branch*)",
+      "Bash(git checkout*)",
+      "Bash(git add*)",
+      "Bash(git stash*)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:go.dev)",
+      "WebFetch(domain:google.github.io)",
+      "WebFetch(domain:dave.cheney.net)",
+      "WebFetch(domain:buf.build)",
+      "WebFetch(domain:entgo.io)",
+      "WebFetch(domain:openobserve.ai)"
+    ],
+    "additionalDirectories": [
+      "/tmp",
+      "/Users/jessemichael/go/pkg/mod"
+    ]
+  },
+  "model": "opus",
+  "enabledPlugins": {
+    "gopls-lsp@claude-plugins-official": true,
+    "modern-go-guidelines@goland-claude-marketplace": true
+  }
+}
