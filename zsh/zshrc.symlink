@@ -25,3 +25,5 @@ unsetopt share_history
 
 # Machine-local config (not committed to git)
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+eval "$(zoxide init zsh)"

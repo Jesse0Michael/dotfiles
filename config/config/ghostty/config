@@ -13,8 +13,10 @@ keybind = global:cmd+grave_accent=toggle_quick_terminal
 quick-terminal-position = top
 quick-terminal-screen = main
 quick-terminal-animation-duration = 0
-quick-terminal-size = 640px,960px
+quick-terminal-size = 480px,960px
 
+# Don't confirm before closing a window/tab
+confirm-close-surface = false
 
 # Shell integration (auto-detects zsh)
 shell-integration = detect

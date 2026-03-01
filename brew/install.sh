@@ -34,6 +34,11 @@ brew install buf
 brew install protobuf
 brew install lsd
 brew install tree
+brew install zoxide
+brew install yazi
+brew install fd
+brew install poppler
+brew install ffmpegthumbnailer
 brew install zsh
 brew install zsh-completions
 brew install redis
