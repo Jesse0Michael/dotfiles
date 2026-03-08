@@ -25,6 +25,8 @@
       "Bash(git stash*)",
       "Bash(git reset*)",
       "Bash(git rebase*)",
+      "WebSearch",
+      "WebFetch",
       "WebFetch(domain:go.dev)",
       "WebFetch(domain:pkg.go.dev)",
       "WebFetch(domain:google.github.io)",
