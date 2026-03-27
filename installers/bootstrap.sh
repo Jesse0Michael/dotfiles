@@ -144,6 +144,44 @@ install_config () {
   done
 }
 
+setup_ssh () {
+  if [ ! -f "$HOME/.ssh/id_ed25519" ]; then
+    info 'setting up SSH key'
+    user 'Enter your email for the SSH key: '
+    read -r ssh_email
+    ssh-keygen -t ed25519 -C "$ssh_email" -f "$HOME/.ssh/id_ed25519" -N ""
+    eval "$(ssh-agent -s)" > /dev/null
+    ssh-add "$HOME/.ssh/id_ed25519"
+
+    mkdir -p "$HOME/.ssh"
+    if ! grep -q "id_ed25519" "$HOME/.ssh/config" 2>/dev/null; then
+      cat >> "$HOME/.ssh/config" <<EOF
+
+Host *
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_ed25519
+EOF
+    fi
+
+    success 'SSH key generated'
+    info 'Add this public key to GitHub (https://github.com/settings/keys):'
+    echo ''
+    cat "$HOME/.ssh/id_ed25519.pub"
+    echo ''
+    user 'Press Enter once you have added the key to GitHub...'
+    read -r
+  else
+    success 'SSH key already exists'
+  fi
+}
+
+if [ "$(uname -s)" == "Darwin" ]; then
+  . "$DOTFILES_ROOT/macos/setup.sh"
+fi
+
+setup_ssh
+
 install_oh_my_zsh
 install_dotfiles
 install_config
@@ -152,7 +190,7 @@ install_config
 if [ "$(uname -s)" == "Darwin" ]
 then
   info "installing dependencies"
-  if bash bin/dot | while read -r data; do info "$data"; done
+  if bash bin/dot
   then
     success "dependencies installed"
   else

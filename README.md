@@ -5,7 +5,7 @@ Jesse's personal dotfiles. Sets up a new Mac with one command.
 ## New Mac setup
 
 ```sh
-git clone git@github.com:jessemichael/dotfiles ~/dotfiles
+git clone https://github.com/jesse0michael/dotfiles ~/dotfiles
 cd ~/dotfiles/installers
 ./bootstrap.sh
 ```
