@@ -1,5 +1,7 @@
 #!/bin/bash
 
+git fetch --quiet 2>/dev/null
+
 changes=$(git status --short)
 pr_state=$(gh pr view --json state -q ".state" 2>/dev/null)
 
@@ -12,4 +14,13 @@ elif [[ "$pr_state" == "OPEN" ]]; then
 	echo "⏳ PR is open, not merged yet"
 else
 	echo "❓ No PR found for this branch"
+	if [[ -n "$changes" ]]; then
+		echo "📝 Uncommitted changes:"
+		echo "$changes"
+	fi
+	local_commits=$(git log --oneline @{upstream}.. 2>/dev/null)
+	if [[ -n "$local_commits" ]]; then
+		echo "📦 Local commits not pushed:"
+		echo "$local_commits"
+	fi
 fi
