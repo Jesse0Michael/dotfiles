@@ -1,0 +1,15 @@
+#!/bin/bash
+
+changes=$(git status --short)
+pr_state=$(gh pr view --json state -q ".state" 2>/dev/null)
+
+if [[ "$pr_state" == "MERGED" && -z "$changes" ]]; then
+	echo "✅ PR merged, branch is clean"
+elif [[ "$pr_state" == "MERGED" ]]; then
+	echo "✅ PR merged, but local uncommitted changes:"
+	echo "$changes"
+elif [[ "$pr_state" == "OPEN" ]]; then
+	echo "⏳ PR is open, not merged yet"
+else
+	echo "❓ No PR found for this branch"
+fi
