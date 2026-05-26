@@ -27,7 +27,24 @@
       "Bash(git stash*)",
       "Bash(git reset*)",
       "Bash(git rebase*)",
-      "Bash(docker *)"
+      "Bash(docker *)",
+      "Bash(gh repo view*)",
+      "Bash(gh issue list*)",
+      "Bash(gh issue view*)",
+      "Bash(gh issue status*)",
+      "Bash(gh pr list*)",
+      "Bash(gh pr view*)",
+      "Bash(gh pr diff*)",
+      "Bash(gh pr checks*)",
+      "Bash(gh pr status*)",
+      "Bash(gh search *)",
+      "Bash(gh browse*)",
+      "Bash(gh run list*)",
+      "Bash(gh run view*)",
+      "Bash(gh workflow list*)",
+      "Bash(gh workflow view*)",
+      "Bash(gh release list*)",
+      "Bash(gh release view*)"
     ],
     "additionalDirectories": [
       "/tmp",
@@ -37,6 +54,16 @@
   "model": "opus[1m]",
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true,
-    "modern-go-guidelines@goland-claude-marketplace": true
-  }
+    "modern-go-guidelines@goland-claude-marketplace": true,
+    "cantina-eng@cantina-skills": true
+  },
+  "extraKnownMarketplaces": {
+    "cantina-skills": {
+      "source": {
+        "source": "github",
+        "repo": "airtimemedia/cantina-skills"
+      }
+    }
+  },
+  "theme": "light-ansi"
 }
