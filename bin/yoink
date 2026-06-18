@@ -1,0 +1,59 @@
+#!/bin/sh
+
+# yoink - download the file from the URL on your clipboard
+
+set -e
+
+url="$(pbpaste)"
+
+case "$url" in
+	"")
+		echo "clipboard is empty" >&2
+		exit 1
+		;;
+	*[[:space:]]*)
+		echo "clipboard doesn't look like a URL: $url" >&2
+		exit 1
+		;;
+	*.*)
+		;;
+	*)
+		echo "clipboard doesn't look like a URL: $url" >&2
+		exit 1
+		;;
+esac
+
+filename="$(basename "$url" | cut -d'?' -f1)"
+
+if [ -z "$filename" ] || [ "$filename" = "/" ]; then
+	echo "couldn't extract a filename from: $url" >&2
+	exit 1
+fi
+
+# if filename has no extension, do a HEAD request to get one from the mime type
+case "$filename" in
+	*.*)
+		;;
+	*)
+		mime="$(curl -fsSL -o /dev/null -w '%{content_type}' -I "$url" | cut -d';' -f1)"
+		case "$mime" in
+			image/jpeg)  ext="jpg" ;;
+			image/png)   ext="png" ;;
+			image/gif)   ext="gif" ;;
+			image/webp)  ext="webp" ;;
+			image/svg*)  ext="svg" ;;
+			video/mp4)   ext="mp4" ;;
+			video/webm)  ext="webm" ;;
+			audio/mpeg)  ext="mp3" ;;
+			application/pdf) ext="pdf" ;;
+			application/zip) ext="zip" ;;
+			*)           ext="" ;;
+		esac
+		if [ -n "$ext" ]; then
+			filename="$filename.$ext"
+		fi
+		;;
+esac
+
+echo "yoinking $filename"
+curl -fSL -o "$filename" "$url"
