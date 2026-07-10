@@ -1,11 +1,56 @@
 #!/bin/bash
 set -euo pipefail
 
+# gup - one command to update from upstream
+#
+# gup      - fetch + rebase onto origin/main
+# gup -f   - same + force push with lease
+# gup -m   - rebase onto main as new home + force push
+#             (warns if parent branch hasn't been merged yet)
+
+PUSH=false
+TO_MAIN=false
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -f) PUSH=true; shift ;;
+        -m) TO_MAIN=true; PUSH=true; shift ;;
+        *) echo "Usage: gup [-f] [-m]"; exit 1 ;;
+    esac
+done
+
 default_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed "s@^refs/remotes/origin/@@")
+current=$(git branch --show-current)
 
-git fetch origin
-git rebase --autostash origin/$default_branch
+git fetch origin "$default_branch"
 
-if [ "${1:-}" = "-f" ]; then
-    git push -f
+if $TO_MAIN; then
+    # Check for unmerged parent branches that are ancestors of HEAD.
+    # If found, the user may be pulling in commits from a branch that isn't in main yet.
+    unmerged_parent=""
+    while IFS= read -r branch; do
+        branch=$(echo "$branch" | xargs) # trim whitespace
+        [[ -z "$branch" ]] && continue
+        # Check if this remote branch is an ancestor of HEAD
+        if git merge-base --is-ancestor "$branch" HEAD 2>/dev/null; then
+            unmerged_parent="$branch"
+            break
+        fi
+    done < <(git branch -r --no-merged "origin/$default_branch" | grep -v "origin/$current" | grep -v "origin/$default_branch" | grep -v "HEAD")
+
+    if [[ -n "$unmerged_parent" ]]; then
+        echo "⚠️  $unmerged_parent has NOT been merged into $default_branch."
+        echo "Rebasing onto $default_branch will include its commits in your branch."
+        read -p "Continue anyway? [y/N] " -n 1 -r
+        echo
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+            exit 1
+        fi
+    fi
+fi
+
+git rebase --autostash "origin/$default_branch"
+
+if $PUSH; then
+    git push --force-with-lease --set-upstream origin "$current"
 fi
