@@ -37,6 +37,9 @@ slog.ErrorContext(ctx, "failed to create client", "err", err)
 - For static values with test identifiers use `test-{type}` or `test-{type}-{index}` (e.g., `test-user`, `test-user-1`)
 - Test fixtures in `testdata/` directories, loaded via `test.LoadFile` / `test.LoadJSONFile`
 - For function test cases, set the function in every test case instead of checking if the value is nil.
+- Compare full expected values, not individual fields. Use `reflect.DeepEqual` or `go-cmp` to compare structs in one assertion rather than checking fields one by one.
+- Use exact expected response bodies in HTTP handler tests rather than substring matching.
+- Use deterministic test setups (e.g. `uuid.SetRand`, `synctest.Test`) so expected values can be hardcoded.
 
 ```go
 func TestService_DoSomething(t *testing.T) {
