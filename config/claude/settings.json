@@ -9,12 +9,18 @@
       "Bash(sed *)",
       "Bash(cp *)",
       "Bash(ls*)",
+      "Bash(echo *)",
+      "Bash(which *)",
       "Bash(find *)",
       "Bash(mkdir *)",
+      "Bash(cd *)",
       "Bash(mv *)",
       "Bash(go *)",
       "Bash(goimports*)",
+      "Bash(golangci-lint *)",
+      "Bash(gofmt *)",
       "Bash(buf *)",
+      "Bash(curl *)",
       "WebFetch",
       "WebSearch",
       "Bash(git status*)",
@@ -27,6 +33,7 @@
       "Bash(git stash*)",
       "Bash(git reset*)",
       "Bash(git rebase*)",
+      "Bash(git config*)",
       "Bash(docker *)",
       "Bash(gh repo view*)",
       "Bash(gh issue list*)",
@@ -44,11 +51,23 @@
       "Bash(gh workflow list*)",
       "Bash(gh workflow view*)",
       "Bash(gh release list*)",
-      "Bash(gh release view*)"
+      "Bash(gh release view*)",
+      "Bash(ps *)",
+      "Bash(vm_stat*)",
+      "Bash(memory_pressure*)",
+      "Bash(pgrep *)",
+      "Bash(wc *)",
+      "Bash(sort *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(cut *)",
+      "Bash(cat *)",
+      "Bash(tr *)"
     ],
     "additionalDirectories": [
       "/tmp",
-      "/Users/jessemichael/go/pkg/mod"
+      "/Users/jessemichael/go/pkg/mod",
+      "/Users/jessemichael/code"
     ]
   },
   "model": "opus[1m]",
@@ -65,5 +84,6 @@
       }
     }
   },
-  "theme": "light-ansi"
+  "theme": "light-ansi",
+  "tui": "fullscreen"
 }
