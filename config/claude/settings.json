@@ -62,7 +62,13 @@
       "Bash(tail *)",
       "Bash(cut *)",
       "Bash(cat *)",
-      "Bash(tr *)"
+      "Bash(tr *)",
+      "Bash(awk *)",
+      "Bash(uniq *)",
+      "Bash(printf *)",
+      "Bash(date)",
+      "Bash(evoke *)",
+      "Bash(rm -f /tmp/*)"
     ],
     "additionalDirectories": [
       "/tmp",
