@@ -14,72 +14,64 @@ else
   echo "Homebrew is already installed..."
 fi
 
-# Install the essential brews
+# Install Homebrew packages
+brew install awscli
+brew install buf
+brew install exiftool
+brew install fd
+brew install ffmpeg
+brew install ffmpegthumbnailer
+brew install fzf
 brew install gh
 brew install git
 brew install git-lfs
-brew install jq
-brew install tmux
 brew install go
-brew install node
 brew install golangci-lint
-brew install awscli
-brew install terraform
-brew install kubernetes-cli
-brew install kubectx
 brew install helm
+brew install imagemagick
+brew install jq
 brew install k6
 brew install k9s
-brew install buf
-brew install protobuf
-brew install sqlite
-brew install redis
+brew install kubectx
+brew install kubernetes-cli
 brew install lsd
-brew install tree
-brew install zoxide
-brew install yazi
-brew install fd
-brew install fzf
-brew install ripgrep
+brew install node
+brew install ollama
+brew install opencode
 brew install poppler
-brew install ffmpegthumbnailer
+brew install protobuf
+brew install redis
+brew install ripgrep
+brew install sqlite
+brew install terraform
+brew install tmux
+brew install tree
+brew install yazi
+# brew install youtube-dl
+brew install zoxide
 brew install zsh
 brew install zsh-completions
-brew install ffmpeg
-# brew install youtube-dl
-brew install imagemagick
-brew install exiftool
-brew install opencode
-brew install ollama
 
-# Install essential casks
-brew install --cask ghostty
-brew install --cask gcloud-cli
-brew install --cask claude-code
-brew install --cask charles
-brew install --cask godot
-brew install --cask zed
+# Install Homebrew applications
 brew install --cask bruno
-
-# Development applications
-brew install --cask postman
-brew install --cask unity-hub
-brew install --cask github
-brew install --cask visual-studio-code
+brew install --cask charles
+brew install --cask claude-code
 brew install --cask dbeaver-community
 brew install --cask docker-desktop
-
-# Communication and everyday applications
-brew install --cask slack
+brew install --cask gcloud-cli
+brew install --cask ghostty
+brew install --cask github
+brew install --cask godot
 brew install --cask google-chrome
+brew install --cask postman
+brew install --cask prusaslicer
+brew install --cask slack
 brew install --cask spotify
-
-
 brew install --cask tailscale-app
 brew install --cask tunnelblick
-
-# 3D-printing applications
-brew install --cask prusaslicer
+brew install --cask unity-hub
+brew install --cask visual-studio-code
+brew install --cask zed
 
 # Update and upgrade
 echo "Updating and upgrading Homebrew..."
