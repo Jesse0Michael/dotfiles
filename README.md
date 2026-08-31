@@ -1,32 +1,44 @@
 # dotfiles
 
-Jesse's personal dotfiles. Sets up a new Mac with one command.
+Jesse's personal dotfiles for setting up a new Mac.
 
 ## New Mac setup
 
+Install Apple's Command Line Tools:
+
 ```sh
-git clone https://github.com/jesse0michael/dotfiles ~/dotfiles
-cd ~/dotfiles/installers
+xcode-select --install
+```
+
+After the installation finishes:
+
+```sh
+mkdir -p ~/code/github.com/jesse0michael
+mkdir -p ~/.ssh
+git clone https://github.com/Jesse0Michael/dotfiles.git ~/code/github.com/jesse0michael/dotfiles
+cd ~/code/github.com/jesse0michael/dotfiles/installers
 ./bootstrap.sh
 ```
 
 This will:
-1. Install oh-my-zsh
-2. Symlink all config files into `~` (zshrc, gitconfig, zprofile)
-3. Apply macOS settings
-4. Install Homebrew + packages
+
+1. Set up an SSH key
+2. Install oh-my-zsh
+3. Symlink config files into `~`
+4. Apply macOS settings
+5. Install Homebrew, packages, and applications
 
 ## Machine-local config
 
-Anything you don't want committed (work email, AWS profile, private env vars) goes in local override files that are gitignored:
+Anything you don't want committed—work email, AWS profile, or private environment variables—goes in local override files:
 
-| File | Purpose |
-|------|---------|
-| `~/.zshrc.local` | Work aliases, extra PATH entries, private env vars |
-| `~/.gitconfig.local` | Work email, signing key overrides |
-| `~/.zprofile.local` | AWS profile, cloud credentials |
+| File                 | Purpose                                                             |
+| -------------------- | ------------------------------------------------------------------- |
+| `~/.zshrc.local`     | Work aliases, extra PATH entries, and private environment variables |
+| `~/.gitconfig.local` | Work email and signing-key overrides                                |
+| `~/.zprofile.local`  | AWS profile and cloud configuration                                 |
 
-Example `~/.gitconfig.local` for a work machine:
+Example `~/.gitconfig.local`:
 
 ```ini
 [user]
@@ -35,22 +47,22 @@ Example `~/.gitconfig.local` for a work machine:
 
 ## Structure
 
-```
+```text
 dotfiles/
-├── bin/          ← scripts in PATH (gfix, gmend, gebase, docker-port, dot)
-├── brew/         ← Homebrew packages
+├── bin/          ← scripts in PATH
+├── brew/         ← Homebrew packages and applications
+├── config/       ← application configuration
 ├── git/          ← gitconfig.symlink → ~/.gitconfig
-├── installers/   ← bootstrap.sh (run this), install.sh
+├── installers/   ← bootstrap.sh and install.sh
 ├── macos/        ← macOS system settings
-└── zsh/          ← zshrc.symlink → ~/.zshrc
-                    zprofile.symlink → ~/.zprofile
-                    aliases
+└── zsh/          ← zshrc, zprofile, and aliases
 ```
 
 ## Updating an existing machine
 
-Re-run bootstrap anytime to re-link files and update packages:
-
 ```sh
-cd ~/dotfiles/installers && ./bootstrap.sh
+cd ~/code/github.com/jesse0michael/dotfiles
+git pull
+cd installers
+./bootstrap.sh
 ```
