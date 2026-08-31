@@ -1,47 +1,28 @@
 #!/bin/bash
 set -euo pipefail
 
-# gup - sync the current branch.
-#
-#   gup       rebase onto the default branch
-#   gup A     rebase relative to A, the branch you branched off of:
-#               A still open -> follow it, replaying just your commits
-#               A merged     -> move your commits onto the default branch
-#   -f        push the result
-#
-# Always --onto, because "where do my commits start" and "where do I land" are
-# different questions. --fork-point answers the first, so a parent that was
-# rebased or squashed never replays its commits into yours.
+# gup [-f] [<parent>] - rebase the current branch onto origin's default branch.
+# <parent> is the branch you forked from when it wasn't the default branch.
+# -f force-pushes the result.
 
 push=false
-while getopts ":f" opt; do
-    case "$opt" in
-        f) push=true ;;
-        *) echo "usage: gup [-f] [<parent>]" >&2; exit 1 ;;
-    esac
+parent=
+for arg in "$@"; do
+    if [[ $arg == -f ]]; then push=true; else parent=$arg; fi
 done
-shift $((OPTIND - 1))
 
-git fetch --prune origin
+git fetch -p origin
 
-main=$(git symbolic-ref --short refs/remotes/origin/HEAD)
-name=${1:-$main}
-name=${name#origin/}
+onto=$(git symbolic-ref --short refs/remotes/origin/HEAD)
 
-# Merging deletes the parent from origin, so --prune above makes it vanish here
-# too. The local branch stays behind and still marks where your commits start,
-# which is all we need from it once we're landing on main instead.
-if git rev-parse --verify --quiet "origin/$name^{commit}" >/dev/null; then
-    ref=origin/$name
-    dest=$ref
-else
-    ref=$name
-    dest=$main
+if [[ -n $(git status --porcelain) ]]; then
+    git stash push -uq -m gup
+    trap 'git stash pop --index -q || echo "gup: your changes are in stash@{0}" >&2' EXIT
 fi
 
-echo "rebasing onto $dest"
-git rebase --autostash --fork-point --onto "$dest" "$ref"
+# Where your commits start and where they land are different questions.
+# --fork-point answers the first, so a parent that was rebased or squash-merged
+# never replays its commits into yours.
+git rebase --fork-point --onto "$onto" "${parent:-$onto}"
 
-if $push; then
-    git push --force-with-lease --set-upstream origin HEAD
-fi
+if $push; then git push --force-with-lease -u origin HEAD; fi

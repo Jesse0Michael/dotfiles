@@ -8,7 +8,7 @@
       "Bash(grep *)",
       "Bash(sed *)",
       "Bash(cp *)",
-      "Bash(ls*)",
+      "Bash(ls *)",
       "Bash(echo *)",
       "Bash(which *)",
       "Bash(find *)",
@@ -34,6 +34,12 @@
       "Bash(git reset*)",
       "Bash(git rebase*)",
       "Bash(git config*)",
+      "Bash(git ls-tree*)",
+      "Bash(git cat-file*)",
+      "Bash(git fetch*)",
+      "Bash(git verify-pack *)",
+      "Bash(git rev-list *)",
+      "Bash(git fsck *)",
       "Bash(docker *)",
       "Bash(gh repo view*)",
       "Bash(gh issue list*)",
@@ -68,7 +74,8 @@
       "Bash(printf *)",
       "Bash(date)",
       "Bash(evoke *)",
-      "Bash(rm -f /tmp/*)"
+      "Bash(rm -f /tmp/*)",
+      "Bash(rm -rf /tmp/*)"
     ],
     "additionalDirectories": [
       "/tmp",
@@ -90,6 +97,6 @@
       }
     }
   },
-  "theme": "light-ansi",
-  "tui": "fullscreen"
+  "tui": "fullscreen",
+  "theme": "light-ansi"
 }

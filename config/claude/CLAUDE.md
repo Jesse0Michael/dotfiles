@@ -1,3 +1,24 @@
+## Working directory boundary
+
+Ask me before writing to anything outside the current working directory — whether
+via Edit/Write or shell (`sed -i`, `mv`, `git checkout/reset`). Read access to
+another repo is not write permission, and needing the change to finish the task is
+not permission. I may have uncommitted work there you can't see.
+
+## Comments
+
+Write every comment as if the current code is the only version that ever existed.
+Never describe a change, a fix, or what the code used to do.
+
+A comment must say something the code doesn't: why this exists, or a constraint you
+can't see (units, nil-ness, ordering, an upstream quirk). If it restates the code,
+delete it.
+
+Default to one line. Go longer only when a reader would get it wrong without the
+extra — not merely when more could be said. Match the file's existing density.
+
+Comments should not take the role of documentation. Do not comments that explaining things outside the code itself. Instead write documentation.
+
 # Go Coding Guidelines
 
 ## Error Handling
@@ -12,7 +33,7 @@ if err != nil {
 
 ## Logging
 
-- Use structured logging with the `slog` package. 
+- Use structured logging with the `slog` package.
 - Always use the `"err"` attribute for errors:
 
 ```go
@@ -31,7 +52,7 @@ slog.ErrorContext(ctx, "failed to create client", "err", err)
 
 ## Testing Conventions
 
-- **Table-driven tests** with multiple test scenarios 
+- **Table-driven tests** with multiple test scenarios
 - Use `t.Context()` for context in tests
 - for mocking use `gomock` and a `mockSetup` test case function
 - For static values with test identifiers use `test-{type}` or `test-{type}-{index}` (e.g., `test-user`, `test-user-1`)
@@ -79,5 +100,6 @@ func TestService_DoSomething(t *testing.T) {
 ## Post-Write Validation
 
 After writing or editing `.go` files:
+
 1. Run `goimports -w` on each changed file to fix formatting and imports
-2. Run `golangci-lint run --fix` on only the changed files 
+2. Run `golangci-lint run --fix` on only the changed files
