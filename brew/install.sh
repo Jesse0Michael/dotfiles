@@ -7,11 +7,18 @@ echo "Checking if Homebrew is already installed..."
 
 # Checks if Homebrew is installed
 # Credit: https://gist.github.com/codeinthehole/26b37efa67041e1307db
-if test ! $(which brew); then
+if ! command -v brew >/dev/null 2>&1; then
   echo "Installing Homebrew..."
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
   echo "Homebrew is already installed..."
+fi
+
+# Make Homebrew available to the remainder of this script.
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -x /usr/local/bin/brew ]]; then
+  eval "$(/usr/local/bin/brew shellenv)"
 fi
 
 # Install Homebrew packages
