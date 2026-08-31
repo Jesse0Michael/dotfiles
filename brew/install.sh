@@ -4,7 +4,7 @@
 # Abort on error
 set -e
 
-echo "Checking if Homebrew is already installed..."; 
+echo "Checking if Homebrew is already installed...";
 
 # Checks if Homebrew is installed
 # Credit: https://gist.github.com/codeinthehole/26b37efa67041e1307db
@@ -19,19 +19,22 @@ fi
 brew install gh
 brew install git
 brew install git-lfs
-brew install jq  
-brew install tmux 
-brew install go  
+brew install jq
+brew install tmux
+brew install go
 brew install node
-brew install golangci-lint 
+brew install golangci-lint
 brew install awscli
 brew install terraform
-brew install kubernetes-cli 
-brew install kubectx 
+brew install kubernetes-cli
+brew install kubectx
 brew install helm
+brew install k6
 brew install k9s
-brew install buf 
+brew install buf
 brew install protobuf
+brew install sqlite
+brew install redis
 brew install lsd
 brew install tree
 brew install zoxide
@@ -45,12 +48,16 @@ brew install redis
 brew install ffmpeg
 # brew install youtube-dl
 brew install imagemagick
+brew install exiftool
 
 # Install essential casks
 brew install --cask ghostty
 brew install --cask gcloud-cli
 brew install --cask claude-code
 brew install --cask charles
+brew install --cask godot
+brew install --cask zed
+brew install --cask bruno
 
 # Update and Upgrade
 echo "Updating and upgrading Homebrew..."; echo;
