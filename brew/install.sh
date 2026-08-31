@@ -39,6 +39,8 @@ brew install tree
 brew install zoxide
 brew install yazi
 brew install fd
+brew install fzf
+brew install ripgrep
 brew install poppler
 brew install ffmpegthumbnailer
 brew install zsh
@@ -47,6 +49,8 @@ brew install ffmpeg
 # brew install youtube-dl
 brew install imagemagick
 brew install exiftool
+brew install opencode
+brew install ollama
 
 # Install essential casks
 brew install --cask ghostty
@@ -63,11 +67,19 @@ brew install --cask unity-hub
 brew install --cask github
 brew install --cask visual-studio-code
 brew install --cask dbeaver-community
+brew install --cask docker-desktop
 
 # Communication and everyday applications
 brew install --cask slack
 brew install --cask google-chrome
 brew install --cask spotify
+
+
+brew install --cask tailscale-app
+brew install --cask tunnelblick
+
+# 3D-printing applications
+brew install --cask prusaslicer
 
 # Update and upgrade
 echo "Updating and upgrading Homebrew..."
