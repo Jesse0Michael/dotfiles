@@ -1,3 +1,8 @@
+---
+name: personal-weekly-summary
+description: Summarize what you personally shipped in the last 7 days (your merged PRs and commits) as a short impact narrative for yourself, your manager, or standup. Run with /personal-weekly-summary.
+---
+
 # Personal Weekly Summary
 
 Author: jesse0michael (jesse.michael1234@gmail.com)
