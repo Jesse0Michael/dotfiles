@@ -124,6 +124,18 @@ install_dotfiles () {
     dst="$HOME/.$(basename "${src%.*}")"
     link_file "$src" "$dst"
   done
+
+  [ -f "$HOME/.zshrc.local" ] || cat > "$HOME/.zshrc.local" <<'EOF'
+# Work aliases, extra PATH entries, and private environment variables.
+EOF
+
+  [ -f "$HOME/.zprofile.local" ] || cat > "$HOME/.zprofile.local" <<'EOF'
+# AWS profile and cloud configuration.
+EOF
+
+  [ -f "$HOME/.gitconfig.local" ] || cat > "$HOME/.gitconfig.local" <<'EOF'
+# Local git overrides.
+EOF
 }
 
 install_config () {
