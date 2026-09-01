@@ -23,8 +23,8 @@ cd ~/code/github.com/jesse0michael/dotfiles/installers
 This will:
 
 1. Set up an SSH key
-2. Install oh-my-zsh
-3. Symlink config files into `~`
+2. Symlink config files into `~`
+3. Install oh-my-zsh
 4. Apply macOS settings
 5. Install Homebrew, packages, and applications
 

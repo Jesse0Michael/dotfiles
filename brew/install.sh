@@ -5,21 +5,14 @@ set -e
 
 echo "Checking if Homebrew is already installed..."
 
-# Checks if Homebrew is installed
-# Credit: https://gist.github.com/codeinthehole/26b37efa67041e1307db
-if ! command -v brew >/dev/null 2>&1; then
+if [[ ! -x /opt/homebrew/bin/brew ]]; then
   echo "Installing Homebrew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
   echo "Homebrew is already installed..."
 fi
 
-# Make Homebrew available to the remainder of this script.
-if [[ -x /opt/homebrew/bin/brew ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-elif [[ -x /usr/local/bin/brew ]]; then
-  eval "$(/usr/local/bin/brew shellenv)"
-fi
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Install Homebrew packages
 brew install awscli
@@ -50,7 +43,6 @@ brew install protobuf
 brew install redis
 brew install ripgrep
 brew install sqlite
-brew install terraform
 brew install tmux
 brew install tree
 brew install yazi
@@ -79,6 +71,10 @@ brew install --cask tunnelblick
 brew install --cask unity-hub
 brew install --cask visual-studio-code
 brew install --cask zed
+
+# Install software from third-party taps
+brew tap hashicorp/tap
+brew install hashicorp/tap/terraform
 
 # Update and upgrade
 echo "Updating and upgrading Homebrew..."

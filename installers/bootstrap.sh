@@ -32,7 +32,7 @@ fail () {
 install_oh_my_zsh () {
   if [ ! -d "$HOME/.oh-my-zsh" ]; then
     info 'installing oh-my-zsh'
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
     success 'oh-my-zsh installed'
   else
     success 'oh-my-zsh already installed'
@@ -182,9 +182,9 @@ fi
 
 setup_ssh
 
-install_oh_my_zsh
 install_dotfiles
 install_config
+install_oh_my_zsh
 
 # If we're on a Mac, install dependencies.
 if [ "$(uname -s)" == "Darwin" ]
