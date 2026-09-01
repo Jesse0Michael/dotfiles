@@ -45,6 +45,21 @@ Example `~/.gitconfig.local`:
     email = jesse@company.com
 ```
 
+## Zed
+
+Zed has no built-in settings sync. `config/config/zed/` is symlinked into
+`~/.config/zed/` and covers everything that is not machine state:
+
+| File           | Notes                                                                 |
+| -------------- | --------------------------------------------------------------------- |
+| `settings.json` | `auto_install_extensions` installs extensions on first launch          |
+| `keymap.json`   | Key bindings                                                          |
+| `tasks.json`    | Global tasks, bound to keys in `keymap.json`                          |
+| `bin/`          | Scripts the tasks invoke                                              |
+
+Not synced, and not worth syncing: `~/Library/Application Support/Zed/` holds
+workspace state, agent threads, and downloaded extension payloads.
+
 ## Structure
 
 ```text
