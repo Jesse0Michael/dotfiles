@@ -6,3 +6,10 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
 # Don't show recently used apps in Dock
 defaults write com.apple.dock show-recents -bool false
+
+# Keep folders on top when sorting by name
+defaults write com.apple.finder _FXSortFoldersFirst -bool true
+
+# Disable the bottom-right Hot Corner (Quick Note)
+defaults write com.apple.dock wvous-br-corner -int 0
+defaults write com.apple.dock wvous-br-modifier -int 0
