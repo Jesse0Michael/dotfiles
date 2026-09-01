@@ -98,5 +98,5 @@
     }
   },
   "tui": "fullscreen",
-  "theme": "light-ansi"
+  "theme": "dark-ansi"
 }
