@@ -97,6 +97,7 @@
       }
     }
   },
+  "effortLevel": "low",
   "tui": "fullscreen",
   "theme": "dark-ansi"
 }

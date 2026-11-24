@@ -14,12 +14,22 @@ A comment must say something the code doesn't: why this exists, or a constraint 
 can't see (units, nil-ness, ordering, an upstream quirk). If it restates the code,
 delete it.
 
+A comment is not the place to compare against another type or function. "Unlike X,
+this..." describes X, not the subject. Say why _this_ exists, standing alone, with
+no other name in it.
+
+A comment states what a thing is, not what it is NOT or does NOT do.
+
 Default to one line. Go longer only when a reader would get it wrong without the
 extra — not merely when more could be said. Match the file's existing density.
 
 Comments should not take the role of documentation. Do not comments that explaining things outside the code itself. Instead write documentation.
 
 # Go Coding Guidelines
+
+Reducing the number of lines of code is not a goal. Readability and maintainability are more important than brevity. Avoid clever code, and favor clarity.
+
+Do not create thin helper wrappers every time you need to do something. Only create a helper when it reduces complexity or improves readability, Not to avoid code duplication.
 
 ## Error Handling
 
@@ -61,6 +71,8 @@ slog.ErrorContext(ctx, "failed to create client", "err", err)
 - Compare full expected values, not individual fields. Use `reflect.DeepEqual` or `go-cmp` to compare structs in one assertion rather than checking fields one by one.
 - Use exact expected response bodies in HTTP handler tests rather than substring matching.
 - Use deterministic test setups (e.g. `uuid.SetRand`, `synctest.Test`) so expected values can be hardcoded.
+- Do not create unnecessary test helpers to reduce redunant code. Use helpers only when they reduce complexity or improve readability.
+- Do not add a new test to test one specific use case or change, unit tests should be created using the table-driven approach to cover multiple scenarios in one test function. Instead you should add a test case to an existing table-driven test function that covers the function.
 
 ```go
 func TestService_DoSomething(t *testing.T) {
