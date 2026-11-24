@@ -17,6 +17,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # Install Homebrew packages
 brew install awscli
 brew install buf
+brew install chafa
 brew install exiftool
 brew install fd
 brew install ffmpeg
@@ -67,6 +68,7 @@ brew install --cask prusaslicer
 brew install --cask slack
 brew install --cask spotify
 brew install --cask tailscale-app
+brew install --cask the-unarchiver
 brew install --cask tunnelblick
 brew install --cask unity-hub
 brew install --cask visual-studio-code
