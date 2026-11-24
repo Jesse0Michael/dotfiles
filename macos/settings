@@ -13,3 +13,37 @@ defaults write com.apple.finder _FXSortFoldersFirst -bool true
 # Disable the bottom-right Hot Corner (Quick Note)
 defaults write com.apple.dock wvous-br-corner -int 0
 defaults write com.apple.dock wvous-br-modifier -int 0
+
+# Sidebar icon size (small)
+defaults write NSGlobalDomain "NSTableViewDefaultSizeMode" -int "1"
+
+# Enable Stage Manager
+defaults write com.apple.WindowManager GloballyEnabled -bool true
+
+# Stage Manager Grouping (one at a time)
+defaults write com.apple.WindowManager AppWindowGroupingBehavior -bool true
+
+# disable Mission Control rearrange spaces
+defaults write com.apple.dock mru-spaces -bool false
+
+# enable feedback when sound changes
+defaults write NSGlobalDomain com.apple.sound.beep.feedback -bool true
+
+# pmset -g custom splits its output into "Battery Power:" and "AC Power:"
+# sections, and reports the battery's lowpowermode setting as "powermode"
+ac_sleep=$(pmset -g custom | sed -n '/^AC Power/,$p' | awk '$1 == "sleep" { print $2 }')
+battery_low_power=$(pmset -g custom | sed -n '/^Battery Power/,/^AC Power/p' | awk '$1 == "powermode" { print $2 }')
+
+# Prevent automatic sleeping while on power adapter
+if [ "$ac_sleep" != 0 ]; then
+  sudo pmset -c sleep 0
+fi
+
+# enable Low Power Mode while running on battery
+if [ "$battery_low_power" != 1 ]; then
+  sudo pmset -b lowpowermode 1
+fi
+
+killall Finder
+killall Dock
+killall WindowManager
